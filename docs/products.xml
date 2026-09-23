@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Market>
+    <offers>
+        <offer>
+            <id>00000008691</id>
+            <code>00000008691</code>
+            <title>Дитяча коляска Anex Flo 2 в 1 Browny</title>
+            <category>Дитячі коляски</category>
+            <brand>Anex</brand>
+            <availability>Є в наявності</availability>
+        </offer>
+        <offer>
+            <id>00000008690</id>
+            <code>00000008690</code>
+            <title>Дитяча коляска Anex Flo 2 в 1 Frossy</title>
+            <category>Дитячі коляски</category>
+            <brand>Anex</brand>
+            <availability>Є в наявності</availability>
+        </offer>
+        <offer>
+            <id>00000008692</id>
+            <code>00000008692</code>
+            <title>Дитяча коляска Anex Flo 2 в 1 Lungo</title>
+            <category>Дитячі коляски</category>
+            <brand>Anex</brand>
+            <availability>Є в наявності</availability>
+        </offer>
+        <offer>
+            <id>00000007572</id>
+            <code>00000007572</code>
+            <title>Дитяча коляска Anex Flo 2 в 1 Yuki</title>
+            <barcode>8885020501636</barcode>
+            <category>Дитячі коляски</category>
+            <brand>Anex</brand>
+            <availability>Є в наявності</availability>
+        </offer>
+        <offer>
+            <id>00000002836</id>
+            <code>00000002836</code>
+            <title>Молоковідсмоктувач акумуляторний "SHELLY" (вільні руки) "BabyOno" арт. 1000</title>
+            <category>Молоковідсмоктувачі</category>
+            <brand>BabyOno</brand>
+            <availability>Є в наявності</availability>
+        </offer>
+        <offer>
+            <id>00000009742</id>
+            <code>00000009742</code>
+            <title>Прогулянкова коляска Anex Ride Freshy</title>
+            <category>Дитячі коляски</category>
+            <brand>Anex</brand>
+            <availability>Є в наявності</availability>
+        </offer>
+        <offer>
+            <id>00000009741</id>
+            <code>00000009741</code>
+            <title>Прогулянкова коляска Anex Ride Warmly</title>
+            <category>Дитячі коляски</category>
+            <brand>Anex</brand>
+            <availability>Є в наявності</availability>
+        </offer>
+    </offers>
+</Market>
