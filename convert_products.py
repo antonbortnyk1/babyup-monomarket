@@ -206,7 +206,7 @@ def get_source_pictures(node):
         if value not in result:
             result.append(value)
 
-    return result[:3]
+    return result
 
 
 def clean_barcode(value):
