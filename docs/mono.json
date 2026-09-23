@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-23T02:32:02Z",
+  "updatedAt": "2026-09-23T08:35:52Z",
   "total": 11,
   "data": [
     {
@@ -17,7 +17,7 @@
       "warranty_type": "no",
       "warranty_period": 0,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 2,
+      "days_to_dispatch": 1,
       "manufacture": null
     },
     {
@@ -35,7 +35,7 @@
       "warranty_type": "no",
       "warranty_period": 0,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 2,
+      "days_to_dispatch": 1,
       "manufacture": null
     },
     {
@@ -53,7 +53,7 @@
       "warranty_type": "no",
       "warranty_period": 0,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 2,
+      "days_to_dispatch": 1,
       "manufacture": null
     },
     {
@@ -71,7 +71,7 @@
       "warranty_type": "no",
       "warranty_period": 0,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 2,
+      "days_to_dispatch": 1,
       "manufacture": null
     },
     {
@@ -89,7 +89,7 @@
       "warranty_type": "no",
       "warranty_period": 0,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 2,
+      "days_to_dispatch": 1,
       "manufacture": null
     },
     {
@@ -107,7 +107,7 @@
       "warranty_type": "no",
       "warranty_period": 0,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 2,
+      "days_to_dispatch": 1,
       "manufacture": null
     },
     {
@@ -125,7 +125,7 @@
       "warranty_type": "no",
       "warranty_period": 0,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 2,
+      "days_to_dispatch": 1,
       "manufacture": null
     },
     {
@@ -143,7 +143,7 @@
       "warranty_type": "no",
       "warranty_period": 0,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 2,
+      "days_to_dispatch": 1,
       "manufacture": null
     },
     {
@@ -161,7 +161,7 @@
       "warranty_type": "no",
       "warranty_period": 0,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 2,
+      "days_to_dispatch": 1,
       "manufacture": null
     },
     {
@@ -179,7 +179,7 @@
       "warranty_type": "no",
       "warranty_period": 0,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 2,
+      "days_to_dispatch": 1,
       "manufacture": null
     },
     {
@@ -197,7 +197,7 @@
       "warranty_type": "no",
       "warranty_period": 0,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 2,
+      "days_to_dispatch": 1,
       "manufacture": null
     }
   ]
