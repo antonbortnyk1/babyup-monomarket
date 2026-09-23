@@ -1,9 +1,14 @@
+import json
 import os
 import re
 import urllib.request
 import xml.etree.ElementTree as ET
+from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urljoin, urlparse
 from xml.dom import minidom
+
+from bs4 import BeautifulSoup, Tag
 
 SOURCE_URL = os.getenv(
     "SOURCE_URL",
@@ -17,88 +22,101 @@ OUTPUT_FILE = Path(
     )
 )
 
+REPORT_FILE = Path(
+    os.getenv(
+        "PRODUCTS_REPORT_FILE",
+        "docs/products-report.json"
+    )
+)
+
 LIMIT = int(os.getenv("PRODUCTS_LIMIT", "0"))
 
+CONDITION_WORDS = (
+    "уцін",
+    "уцен",
+    "вітрин",
+    "витрин",
+    "пошкоджен",
+    "поврежден",
+    "б/в",
+    "б\\у",
+    "refurb"
+)
 
-def clean_xml_text(value):
+TITLE_BLOCKED_WORDS = (
+    "акція",
+    "знижка",
+    "розпродаж",
+    "уцінка",
+    "copy",
+    "original"
+)
+
+DESCRIPTION_BLOCKED_SECTIONS = (
+    "комплектац",
+    "гаранті",
+    "гарант",
+    "доставк",
+    "оплат"
+)
+
+DESCRIPTION_BLOCKED_PARAGRAPHS = (
+    "babyup",
+    "доставка доступна",
+    "безкоштовна доставка",
+    "купити",
+    "замовити"
+)
+
+IMAGE_EXTENSIONS = (
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".gif",
+    ".bmp",
+    ".webp",
+    ".svg"
+)
+
+VIDEO_EXTENSIONS = (
+    ".mp4",
+    ".mov",
+    ".avi",
+    ".webm"
+)
+
+
+def normalize_space(value):
     if value is None:
         return None
-
-    value = str(value)
 
     value = re.sub(
         r"[\x00-\x08\x0B\x0C\x0E-\x1F]",
         "",
-        value
+        str(value)
     )
 
-    value = value.strip()
+    value = re.sub(
+        r"\s+",
+        " ",
+        value
+    ).strip()
 
     return value if value else None
 
 
-def text(node, name):
+def node_text(node, name):
     child = node.find(name)
 
     if child is None or child.text is None:
         return None
 
-    return clean_xml_text(child.text)
+    return normalize_space(child.text)
 
 
-def get_params(node):
-    result = []
-
-    for param in node.findall("param"):
-        name = clean_xml_text(
-            param.get("name")
-        )
-
-        value = clean_xml_text(
-            param.text
-        )
-
-        if not name or not value:
-            continue
-
-        result.append(
-            {
-                "name": name,
-                "value": value
-            }
-        )
-
-    return result
-
-
-def get_barcode(params):
-    for param in params:
-        if param["name"].strip().lower() == "ean":
-            return param["value"]
-
-    return None
-
-
-def get_pictures(node):
-    result = []
-
-    for picture in node.findall("picture"):
-        value = clean_xml_text(
-            picture.text
-        )
-
-        if not value:
-            continue
-
-        if value not in result:
-            result.append(value)
-
-    return result
-
-
-def load_xml():
+def fetch_bytes(url):
     request = urllib.request.Request(
-        SOURCE_URL,
+        url,
         headers={
             "User-Agent": "Mozilla/5.0"
         }
@@ -111,41 +129,1193 @@ def load_xml():
         return response.read()
 
 
+def fetch_text(url):
+    data = fetch_bytes(url)
+
+    try:
+        return data.decode("utf-8")
+    except UnicodeDecodeError:
+        return data.decode(
+            "utf-8",
+            errors="replace"
+        )
+
+
 def build_categories(root):
-    result = {}
+    categories = {}
 
     for category in root.findall(
         "./shop/categories/category"
     ):
-        category_id = clean_xml_text(
+        category_id = normalize_space(
             category.get("id")
         )
 
-        category_name = clean_xml_text(
+        category_name = normalize_space(
             category.text
         )
 
-        if (
-            category_id
-            and category_name
-        ):
-            result[
+        if category_id and category_name:
+            categories[
                 category_id
             ] = category_name
+
+    return categories
+
+
+def get_source_params(node):
+    result = []
+
+    for param in node.findall("param"):
+        name = normalize_space(
+            param.get("name")
+        )
+
+        value = normalize_space(
+            param.text
+        )
+
+        if name and value:
+            result.append(
+                (
+                    name,
+                    value
+                )
+            )
 
     return result
 
 
-def add_text_element(
+def get_source_pictures(node):
+    result = []
+
+    for picture in node.findall(
+        "picture"
+    ):
+        value = normalize_space(
+            picture.text
+        )
+
+        if not value:
+            continue
+
+        path = urlparse(
+            value
+        ).path.lower()
+
+        if not path.endswith(
+            IMAGE_EXTENSIONS
+        ):
+            continue
+
+        if value not in result:
+            result.append(value)
+
+    return result[:3]
+
+
+def clean_barcode(value):
+    if not value:
+        return None
+
+    digits = re.sub(
+        r"\D",
+        "",
+        str(value)
+    )
+
+    if 8 <= len(digits) <= 14:
+        return digits
+
+    return None
+
+
+def get_source_barcode(params):
+    accepted = {
+        "ean",
+        "ean13",
+        "ean-13",
+        "barcode",
+        "штрихкод",
+        "штрих-код",
+        "gtin",
+        "gtin13",
+        "gtin-13"
+    }
+
+    for name, value in params:
+        if name.lower() in accepted:
+            barcode = clean_barcode(
+                value
+            )
+
+            if barcode:
+                return barcode
+
+    return None
+
+
+def parse_jsonld(soup):
+    result = []
+
+    for script in soup.find_all(
+        "script",
+        attrs={
+            "type": re.compile(
+                r"application/ld\+json",
+                re.I
+            )
+        }
+    ):
+        raw = script.string or script.get_text()
+
+        if not raw:
+            continue
+
+        try:
+            data = json.loads(raw)
+        except Exception:
+            continue
+
+        result.append(data)
+
+    return result
+
+
+def walk_json(value):
+    if isinstance(value, dict):
+        yield value
+
+        for item in value.values():
+            yield from walk_json(item)
+
+    elif isinstance(value, list):
+        for item in value:
+            yield from walk_json(item)
+
+
+def jsonld_product_data(jsonld):
+    result = {}
+
+    for root in jsonld:
+        for item in walk_json(root):
+            item_type = item.get("@type")
+
+            if isinstance(
+                item_type,
+                list
+            ):
+                types = {
+                    str(x).lower()
+                    for x in item_type
+                }
+            else:
+                types = {
+                    str(item_type).lower()
+                }
+
+            if "product" not in types:
+                continue
+
+            for key in (
+                "sku",
+                "mpn",
+                "gtin",
+                "gtin8",
+                "gtin12",
+                "gtin13",
+                "gtin14"
+            ):
+                if key in item and item[key]:
+                    result[
+                        key
+                    ] = normalize_space(
+                        item[key]
+                    )
+
+            brand = item.get(
+                "brand"
+            )
+
+            if isinstance(
+                brand,
+                dict
+            ):
+                brand = brand.get(
+                    "name"
+                )
+
+            if brand:
+                result[
+                    "brand"
+                ] = normalize_space(
+                    brand
+                )
+
+    return result
+
+
+def jsonld_breadcrumbs(jsonld):
+    candidates = []
+
+    for root in jsonld:
+        for item in walk_json(root):
+            item_type = item.get("@type")
+
+            if isinstance(
+                item_type,
+                list
+            ):
+                types = {
+                    str(x).lower()
+                    for x in item_type
+                }
+            else:
+                types = {
+                    str(item_type).lower()
+                }
+
+            if "breadcrumblist" not in types:
+                continue
+
+            names = []
+
+            for element in item.get(
+                "itemListElement",
+                []
+            ):
+                if not isinstance(
+                    element,
+                    dict
+                ):
+                    continue
+
+                name = element.get(
+                    "name"
+                )
+
+                if not name:
+                    nested = element.get(
+                        "item"
+                    )
+
+                    if isinstance(
+                        nested,
+                        dict
+                    ):
+                        name = nested.get(
+                            "name"
+                        )
+
+                name = normalize_space(
+                    name
+                )
+
+                if name:
+                    names.append(name)
+
+            if names:
+                candidates = names
+
+    return candidates
+
+
+def get_page_barcode(
+    soup,
+    raw_html,
+    jsonld_data,
+    source_barcode
+):
+    if source_barcode:
+        return source_barcode
+
+    product_data = jsonld_product_data(
+        jsonld_data
+    )
+
+    for key in (
+        "gtin14",
+        "gtin13",
+        "gtin12",
+        "gtin8",
+        "gtin"
+    ):
+        barcode = clean_barcode(
+            product_data.get(
+                key
+            )
+        )
+
+        if barcode:
+            return barcode
+
+    page_text = soup.get_text(
+        " ",
+        strip=True
+    )
+
+    patterns = (
+        r"(?:EAN(?:-13)?|GTIN(?:-13)?|Штрих[\s-]*код)\s*[:№]?\s*([0-9]{8,14})",
+        r'"(?:ean|gtin|barcode|gtin13|gtin14)"\s*:\s*"([0-9]{8,14})"'
+    )
+
+    for pattern in patterns:
+        for haystack in (
+            page_text,
+            raw_html
+        ):
+            match = re.search(
+                pattern,
+                haystack,
+                re.I
+            )
+
+            if match:
+                barcode = clean_barcode(
+                    match.group(1)
+                )
+
+                if barcode:
+                    return barcode
+
+    return None
+
+
+def get_vendor_code(
+    soup,
+    raw_html,
+    jsonld_data,
+    fallback
+):
+    product_data = jsonld_product_data(
+        jsonld_data
+    )
+
+    for key in (
+        "mpn",
+        "sku"
+    ):
+        value = normalize_space(
+            product_data.get(
+                key
+            )
+        )
+
+        if value:
+            return value
+
+    page_text = soup.get_text(
+        " ",
+        strip=True
+    )
+
+    patterns = (
+        r"Артикул\s*[:№]?\s*([A-Za-zА-Яа-яІіЇїЄєҐґ0-9._/\-]+)",
+        r"(?:SKU|MPN)\s*[:№]?\s*([A-Za-z0-9._/\-]+)"
+    )
+
+    for pattern in patterns:
+        for haystack in (
+            page_text,
+            raw_html
+        ):
+            match = re.search(
+                pattern,
+                haystack,
+                re.I
+            )
+
+            if match:
+                value = normalize_space(
+                    match.group(1)
+                )
+
+                if value:
+                    return value
+
+    return fallback
+
+
+def get_final_category(
+    soup,
+    jsonld_data,
+    source_category,
+    title
+):
+    breadcrumbs = jsonld_breadcrumbs(
+        jsonld_data
+    )
+
+    if not breadcrumbs:
+        selectors = (
+            ".breadcrumbs a",
+            ".breadcrumb a",
+            ".breadcrumb-item a",
+            "[itemtype*='BreadcrumbList'] [itemprop='name']",
+            ".breadcrumbs__item a"
+        )
+
+        for selector in selectors:
+            values = [
+                normalize_space(
+                    item.get_text(
+                        " ",
+                        strip=True
+                    )
+                )
+                for item in soup.select(
+                    selector
+                )
+            ]
+
+            values = [
+                item
+                for item in values
+                if item
+            ]
+
+            if values:
+                breadcrumbs = values
+                break
+
+    ignored = {
+        "головна",
+        "каталог",
+        normalize_space(
+            title
+        ).lower()
+        if title
+        else ""
+    }
+
+    filtered = []
+
+    for item in breadcrumbs:
+        normalized = normalize_space(
+            item
+        )
+
+        if not normalized:
+            continue
+
+        if normalized.lower() in ignored:
+            continue
+
+        filtered.append(
+            normalized
+        )
+
+    if filtered:
+        return filtered[-1]
+
+    return source_category
+
+
+def add_characteristic(
+    target,
+    seen,
+    name,
+    value
+):
+    name = normalize_space(name)
+    value = normalize_space(value)
+
+    if not name or not value:
+        return
+
+    if len(name) > 100:
+        return
+
+    if len(value) > 500:
+        return
+
+    normalized_name = name.lower()
+
+    if normalized_name in {
+        "бренд",
+        "артикул",
+        "ean",
+        "ean13",
+        "штрихкод",
+        "штрих-код",
+        "gtin"
+    }:
+        return
+
+    key = (
+        normalized_name,
+        value.lower()
+    )
+
+    if key in seen:
+        return
+
+    seen.add(key)
+
+    target.append(
+        (
+            name,
+            value
+        )
+    )
+
+
+def extract_page_characteristics(
+    soup
+):
+    result = []
+    seen = set()
+
+    for row in soup.find_all(
+        "tr"
+    ):
+        cells = row.find_all(
+            [
+                "th",
+                "td"
+            ],
+            recursive=False
+        )
+
+        if len(cells) < 2:
+            continue
+
+        add_characteristic(
+            result,
+            seen,
+            cells[0].get_text(
+                " ",
+                strip=True
+            ),
+            cells[1].get_text(
+                " ",
+                strip=True
+            )
+        )
+
+    for dt in soup.find_all(
+        "dt"
+    ):
+        dd = dt.find_next_sibling(
+            "dd"
+        )
+
+        if dd is None:
+            continue
+
+        add_characteristic(
+            result,
+            seen,
+            dt.get_text(
+                " ",
+                strip=True
+            ),
+            dd.get_text(
+                " ",
+                strip=True
+            )
+        )
+
+    lines = [
+        normalize_space(
+            value
+        )
+        for value in soup.stripped_strings
+    ]
+
+    lines = [
+        value
+        for value in lines
+        if value
+    ]
+
+    start = None
+
+    for index, value in enumerate(
+        lines
+    ):
+        if value.lower() == "характеристики":
+            start = index + 1
+            break
+
+    if start is not None:
+        stop_words = {
+            "відео",
+            "відгуки",
+            "опис",
+            "схожі товари",
+            "рекомендовані товари"
+        }
+
+        section = []
+
+        for value in lines[
+            start:start + 80
+        ]:
+            if value.lower() in stop_words:
+                break
+
+            section.append(value)
+
+        index = 0
+
+        while index + 1 < len(
+            section
+        ):
+            name = section[index]
+            value = section[
+                index + 1
+            ]
+
+            if (
+                1 <= len(name) <= 100
+                and 1 <= len(value) <= 500
+            ):
+                add_characteristic(
+                    result,
+                    seen,
+                    name,
+                    value
+                )
+
+                index += 2
+            else:
+                index += 1
+
+    return result
+
+
+def merge_characteristics(
+    page_characteristics,
+    source_params
+):
+    result = []
+    seen = set()
+
+    for name, value in (
+        page_characteristics
+        + source_params
+    ):
+        add_characteristic(
+            result,
+            seen,
+            name,
+            value
+        )
+
+    return result
+
+
+def parse_number(value):
+    if not value:
+        return None
+
+    match = re.search(
+        r"(-?\d+(?:[.,]\d+)?)",
+        str(value)
+    )
+
+    if not match:
+        return None
+
+    return float(
+        match.group(1).replace(
+            ",",
+            "."
+        )
+    )
+
+
+def format_number(value):
+    if value is None:
+        return None
+
+    if float(
+        value
+    ).is_integer():
+        return str(
+            int(value)
+        )
+
+    return (
+        f"{value:.3f}"
+        .rstrip("0")
+        .rstrip(".")
+    )
+
+
+def convert_weight_to_kg(value):
+    number = parse_number(
+        value
+    )
+
+    if number is None:
+        return None
+
+    lowered = value.lower()
+
+    if "кг" in lowered:
+        return format_number(
+            number
+        )
+
+    if re.search(
+        r"(^|\s)г($|\s|[.,])",
+        lowered
+    ):
+        return format_number(
+            number / 1000
+        )
+
+    return None
+
+
+def convert_dimension_to_cm(value):
+    number = parse_number(
+        value
+    )
+
+    if number is None:
+        return None
+
+    lowered = value.lower()
+
+    if "мм" in lowered:
+        return format_number(
+            number / 10
+        )
+
+    if "см" in lowered:
+        return format_number(
+            number
+        )
+
+    if re.search(
+        r"(^|\s)м($|\s|[.,])",
+        lowered
+    ):
+        return format_number(
+            number * 100
+        )
+
+    return None
+
+
+def get_packaging_dimensions(
+    characteristics
+):
+    result = {
+        "weight": None,
+        "height": None,
+        "width": None,
+        "length": None
+    }
+
+    for name, value in characteristics:
+        lowered = name.lower()
+
+        is_package = (
+            "упаков" in lowered
+            or "брутто" in lowered
+            or "пакув" in lowered
+        )
+
+        if not is_package:
+            continue
+
+        if (
+            result["weight"] is None
+            and (
+                "ваг" in lowered
+                or "вес" in lowered
+            )
+        ):
+            result[
+                "weight"
+            ] = convert_weight_to_kg(
+                value
+            )
+
+        if (
+            result["height"] is None
+            and (
+                "висот" in lowered
+                or "высот" in lowered
+            )
+        ):
+            result[
+                "height"
+            ] = convert_dimension_to_cm(
+                value
+            )
+
+        if (
+            result["width"] is None
+            and "ширин" in lowered
+        ):
+            result[
+                "width"
+            ] = convert_dimension_to_cm(
+                value
+            )
+
+        if (
+            result["length"] is None
+            and (
+                "довжин" in lowered
+                or "длин" in lowered
+            )
+        ):
+            result[
+                "length"
+            ] = convert_dimension_to_cm(
+                value
+            )
+
+    return result
+
+
+def sanitize_title(
+    title,
+    vendor_code
+):
+    value = normalize_space(
+        title
+    )
+
+    if not value:
+        return None
+
+    for word in TITLE_BLOCKED_WORDS:
+        value = re.sub(
+            rf"\b{re.escape(word)}\b",
+            "",
+            value,
+            flags=re.I
+        )
+
+    value = value.replace(
+        '"',
+        ""
+    )
+
+    value = value.replace(
+        "«",
+        ""
+    ).replace(
+        "»",
+        ""
+    )
+
+    value = re.sub(
+        r"\s+",
+        " ",
+        value
+    ).strip()
+
+    if (
+        vendor_code
+        and vendor_code not in value
+    ):
+        suffix = f" ({vendor_code})"
+
+        if (
+            len(value)
+            + len(suffix)
+            <= 100
+        ):
+            value += suffix
+
+    if len(value) > 100:
+        value = value[:100].rstrip()
+
+    return value
+
+
+def remove_forbidden_description_sections(
+    soup
+):
+    for heading in list(
+        soup.find_all(
+            re.compile(
+                r"^h[1-6]$"
+            )
+        )
+    ):
+        heading_text = normalize_space(
+            heading.get_text(
+                " ",
+                strip=True
+            )
+        ) or ""
+
+        if any(
+            word in heading_text.lower()
+            for word in DESCRIPTION_BLOCKED_SECTIONS
+        ):
+            sibling = heading.next_sibling
+
+            while sibling is not None:
+                next_sibling = (
+                    sibling.next_sibling
+                )
+
+                if (
+                    isinstance(
+                        sibling,
+                        Tag
+                    )
+                    and re.fullmatch(
+                        r"h[1-6]",
+                        sibling.name or "",
+                        re.I
+                    )
+                ):
+                    break
+
+                if isinstance(
+                    sibling,
+                    Tag
+                ):
+                    sibling.decompose()
+                else:
+                    sibling.extract()
+
+                sibling = next_sibling
+
+            heading.decompose()
+
+    for element in list(
+        soup.find_all(
+            [
+                "p",
+                "li"
+            ]
+        )
+    ):
+        value = normalize_space(
+            element.get_text(
+                " ",
+                strip=True
+            )
+        ) or ""
+
+        lowered = value.lower()
+
+        if any(
+            word in lowered
+            for word in DESCRIPTION_BLOCKED_PARAGRAPHS
+        ):
+            element.decompose()
+
+
+def sanitize_description(
+    value,
+    base_url
+):
+    if not value:
+        return None
+
+    soup = BeautifulSoup(
+        value,
+        "html.parser"
+    )
+
+    for tag in soup.find_all(
+        [
+            "script",
+            "style",
+            "iframe",
+            "form",
+            "button"
+        ]
+    ):
+        tag.decompose()
+
+    remove_forbidden_description_sections(
+        soup
+    )
+
+    for heading in soup.find_all(
+        re.compile(
+            r"^h[1-6]$"
+        )
+    ):
+        heading.name = "h5"
+
+    for ordered in soup.find_all(
+        "ol"
+    ):
+        ordered.name = "ul"
+
+    for image in soup.find_all(
+        "img"
+    ):
+        src = normalize_space(
+            image.get(
+                "src"
+            )
+        )
+
+        if not src:
+            image.decompose()
+            continue
+
+        src = urljoin(
+            base_url,
+            src
+        )
+
+        path = urlparse(
+            src
+        ).path.lower()
+
+        if not path.endswith(
+            IMAGE_EXTENSIONS
+        ):
+            image.decompose()
+            continue
+
+        alt = normalize_space(
+            image.get(
+                "alt"
+            )
+        ) or ""
+
+        image.attrs = {
+            "alt": alt,
+            "src": src
+        }
+
+    allowed = {
+        "h5",
+        "br",
+        "p",
+        "ul",
+        "li",
+        "img"
+    }
+
+    for tag in list(
+        soup.find_all(True)
+    ):
+        if tag.name in allowed:
+            if tag.name != "img":
+                tag.attrs = {}
+
+            continue
+
+        tag.unwrap()
+
+    for tag in list(
+        soup.find_all(
+            [
+                "p",
+                "h5",
+                "li"
+            ]
+        )
+    ):
+        text_value = normalize_space(
+            tag.get_text(
+                " ",
+                strip=True
+            )
+        )
+
+        if (
+            not text_value
+            and not tag.find(
+                "img"
+            )
+        ):
+            tag.decompose()
+
+    result = str(soup).strip()
+
+    return result if result else None
+
+
+def extract_page_videos(
+    soup,
+    base_url
+):
+    result = []
+
+    urls = []
+
+    for tag in soup.find_all(
+        [
+            "video",
+            "source",
+            "a"
+        ]
+    ):
+        for attribute in (
+            "src",
+            "href"
+        ):
+            value = normalize_space(
+                tag.get(
+                    attribute
+                )
+            )
+
+            if value:
+                urls.append(
+                    urljoin(
+                        base_url,
+                        value
+                    )
+                )
+
+    for value in urls:
+        path = urlparse(
+            value
+        ).path.lower()
+
+        if not path.endswith(
+            VIDEO_EXTENSIONS
+        ):
+            continue
+
+        if value not in result:
+            result.append(value)
+
+    return result[:3]
+
+
+def is_condition_good(
+    title,
+    category
+):
+    haystack = " ".join(
+        value
+        for value in (
+            title,
+            category
+        )
+        if value
+    ).lower()
+
+    return any(
+        word in haystack
+        for word in CONDITION_WORDS
+    )
+
+
+def add_text(
     document,
     parent,
     name,
     value
 ):
-    value = clean_xml_text(value)
+    value = normalize_space(
+        value
+    )
 
     if value is None:
-        return None
+        return
 
     element = document.createElement(
         name
@@ -161,23 +1331,19 @@ def add_text_element(
         element
     )
 
-    return element
 
-
-def add_cdata_element(
+def add_cdata(
     document,
     parent,
     name,
     value
 ):
-    value = clean_xml_text(value)
-
-    if value is None:
-        return None
+    if not value:
+        return
 
     value = value.replace(
         "]]>",
-        "]]]]><![CDATA[>"
+        "]] >"
     )
 
     element = document.createElement(
@@ -193,8 +1359,6 @@ def add_cdata_element(
     parent.appendChild(
         element
     )
-
-    return element
 
 
 def convert(xml_bytes):
@@ -233,13 +1397,29 @@ def convert(xml_bytes):
         offers
     )
 
-    total = 0
-    skipped_unavailable = 0
-    skipped_invalid = 0
+    report = {
+        "generatedAt": datetime.now(
+            timezone.utc
+        ).isoformat(
+            timespec="seconds"
+        ).replace(
+            "+00:00",
+            "Z"
+        ),
+        "source": SOURCE_URL,
+        "sourceOffers": len(
+            source_offers
+        ),
+        "exported": 0,
+        "skipped": [],
+        "warnings": []
+    }
 
     for source_offer in source_offers:
-        code = clean_xml_text(
-            source_offer.get("id")
+        code = normalize_space(
+            source_offer.get(
+                "id"
+            )
         )
 
         available = (
@@ -255,20 +1435,27 @@ def convert(xml_bytes):
         )
 
         if not available:
-            skipped_unavailable += 1
+            report[
+                "skipped"
+            ].append(
+                {
+                    "code": code,
+                    "reason": "not_available"
+                }
+            )
             continue
 
-        title = text(
+        source_title = node_text(
             source_offer,
             "name"
         )
 
-        category_id = text(
+        category_id = node_text(
             source_offer,
             "categoryId"
         )
 
-        category = (
+        source_category = (
             categories.get(
                 category_id
             )
@@ -276,40 +1463,226 @@ def convert(xml_bytes):
             else None
         )
 
-        brand = text(
-            source_offer,
-            "vendor"
-        )
+        if is_condition_good(
+            source_title,
+            source_category
+        ):
+            report[
+                "skipped"
+            ].append(
+                {
+                    "code": code,
+                    "reason": "condition_goods"
+                }
+            )
+            continue
 
-        product_url = text(
+        product_url = node_text(
             source_offer,
             "url"
         )
 
-        description = text(
+        brand = node_text(
             source_offer,
-            "description"
+            "vendor"
         )
 
-        params = get_params(
+        description_node = (
+            source_offer.find(
+                "description"
+            )
+        )
+
+        source_description = (
+            description_node.text
+            if description_node is not None
+            else None
+        )
+
+        source_params = get_source_params(
             source_offer
         )
 
-        barcode = get_barcode(
-            params
-        )
-
-        pictures = get_pictures(
+        pictures = get_source_pictures(
             source_offer
         )
 
-        if (
-            not code
-            or not title
-            or not category
+        raw_html = ""
+
+        soup = BeautifulSoup(
+            "",
+            "html.parser"
+        )
+
+        jsonld_data = []
+
+        if product_url:
+            try:
+                raw_html = fetch_text(
+                    product_url
+                )
+
+                soup = BeautifulSoup(
+                    raw_html,
+                    "html.parser"
+                )
+
+                jsonld_data = parse_jsonld(
+                    soup
+                )
+            except Exception as error:
+                report[
+                    "warnings"
+                ].append(
+                    {
+                        "code": code,
+                        "warning": "product_page_fetch_failed",
+                        "details": str(
+                            error
+                        )
+                    }
+                )
+
+        source_barcode = get_source_barcode(
+            source_params
+        )
+
+        barcode = get_page_barcode(
+            soup,
+            raw_html,
+            jsonld_data,
+            source_barcode
+        )
+
+        vendor_code = get_vendor_code(
+            soup,
+            raw_html,
+            jsonld_data,
+            code
+        )
+
+        category = get_final_category(
+            soup,
+            jsonld_data,
+            source_category,
+            source_title
+        )
+
+        page_characteristics = (
+            extract_page_characteristics(
+                soup
+            )
+            if raw_html
+            else []
+        )
+
+        characteristics = (
+            merge_characteristics(
+                page_characteristics,
+                source_params
+            )
+        )
+
+        packaging = (
+            get_packaging_dimensions(
+                characteristics
+            )
+        )
+
+        title = sanitize_title(
+            source_title,
+            vendor_code
+        )
+
+        description = (
+            sanitize_description(
+                source_description,
+                product_url
+                or "https://babyup.ua/"
+            )
+        )
+
+        videos = (
+            extract_page_videos(
+                soup,
+                product_url
+            )
+            if raw_html
+            and product_url
+            else []
+        )
+
+        missing_required = []
+
+        for field, value in (
+            (
+                "code",
+                code
+            ),
+            (
+                "vendor_code",
+                vendor_code
+            ),
+            (
+                "title",
+                title
+            ),
+            (
+                "barcode",
+                barcode
+            ),
+            (
+                "category",
+                category
+            ),
+            (
+                "brand",
+                brand
+            ),
+            (
+                "description",
+                description
+            )
         ):
-            skipped_invalid += 1
+            if not value:
+                missing_required.append(
+                    field
+                )
+
+        if not pictures:
+            missing_required.append(
+                "image_link"
+            )
+
+        if missing_required:
+            report[
+                "skipped"
+            ].append(
+                {
+                    "code": code,
+                    "reason": "missing_required_fields",
+                    "fields": missing_required
+                }
+            )
             continue
+
+        missing_packaging = [
+            field
+            for field, value
+            in packaging.items()
+            if not value
+        ]
+
+        if missing_packaging:
+            report[
+                "warnings"
+            ].append(
+                {
+                    "code": code,
+                    "warning": "missing_packaging_dimensions",
+                    "fields": missing_packaging
+                }
+            )
 
         offer = document.createElement(
             "offer"
@@ -319,119 +1692,147 @@ def convert(xml_bytes):
             offer
         )
 
-        add_text_element(
+        add_text(
             document,
             offer,
             "id",
             code
         )
 
-        add_text_element(
+        add_text(
             document,
             offer,
             "code",
             code
         )
 
-        add_text_element(
+        add_text(
             document,
             offer,
             "vendor_code",
-            code
+            vendor_code
         )
 
-        add_text_element(
+        add_text(
             document,
             offer,
             "title",
             title
         )
 
-        if barcode:
-            add_text_element(
-                document,
-                offer,
-                "barcode",
-                barcode
-            )
+        add_text(
+            document,
+            offer,
+            "barcode",
+            barcode
+        )
 
-        add_text_element(
+        add_text(
             document,
             offer,
             "category",
             category
         )
 
-        if brand:
-            add_text_element(
-                document,
-                offer,
-                "brand",
-                brand
-            )
+        add_text(
+            document,
+            offer,
+            "brand",
+            brand
+        )
 
-        add_text_element(
+        add_text(
             document,
             offer,
             "availability",
             "Є в наявності"
         )
 
-        if product_url:
-            add_text_element(
-                document,
-                offer,
-                "url",
-                product_url
+        for field in (
+            "weight",
+            "height",
+            "width",
+            "length"
+        ):
+            if packaging[
+                field
+            ]:
+                add_text(
+                    document,
+                    offer,
+                    field,
+                    packaging[
+                        field
+                    ]
+                )
+
+        add_cdata(
+            document,
+            offer,
+            "description",
+            description
+        )
+
+        image_link = (
+            document.createElement(
+                "image_link"
             )
+        )
+
+        offer.appendChild(
+            image_link
+        )
 
         for picture in pictures:
-            add_text_element(
+            add_text(
                 document,
-                offer,
+                image_link,
                 "picture",
                 picture
             )
 
-        if description:
-            add_cdata_element(
+        for video in videos:
+            add_text(
                 document,
                 offer,
-                "description",
-                description
+                "video_link",
+                video
             )
 
-        for param in params:
-            if (
-                param["name"]
-                .strip()
-                .lower()
-                == "ean"
-            ):
-                continue
-
-            param_element = (
-                document.createElement(
-                    "param"
-                )
-            )
-
-            param_element.setAttribute(
-                "name",
-                param["name"]
-            )
-
-            param_element.appendChild(
-                document.createTextNode(
-                    param["value"]
-                )
+        if characteristics:
+            tags = document.createElement(
+                "tags"
             )
 
             offer.appendChild(
-                param_element
+                tags
             )
 
-        total += 1
+            for name, value in characteristics:
+                param = (
+                    document.createElement(
+                        "param"
+                    )
+                )
+
+                param.setAttribute(
+                    "name",
+                    name
+                )
+
+                param.appendChild(
+                    document.createTextNode(
+                        value
+                    )
+                )
+
+                tags.appendChild(
+                    param
+                )
+
+        report[
+            "exported"
+        ] += 1
 
     xml = document.toprettyxml(
         indent="    ",
@@ -447,29 +1848,37 @@ def convert(xml_bytes):
         xml
     )
 
-    return (
-        total,
-        skipped_unavailable,
-        skipped_invalid
+    REPORT_FILE.parent.mkdir(
+        parents=True,
+        exist_ok=True
     )
+
+    REPORT_FILE.write_text(
+        json.dumps(
+            report,
+            ensure_ascii=False,
+            indent=2
+        ) + "\n",
+        encoding="utf-8"
+    )
+
+    return report
 
 
 def main():
-    xml_bytes = load_xml()
+    xml_bytes = fetch_bytes(
+        SOURCE_URL
+    )
 
-    (
-        total,
-        skipped_unavailable,
-        skipped_invalid
-    ) = convert(
+    report = convert(
         xml_bytes
     )
 
     print(
         f"Generated {OUTPUT_FILE}: "
-        f"{total} products, "
-        f"{skipped_unavailable} unavailable skipped, "
-        f"{skipped_invalid} invalid skipped"
+        f"{report['exported']} products, "
+        f"{len(report['skipped'])} skipped, "
+        f"{len(report['warnings'])} warnings"
     )
 
 
