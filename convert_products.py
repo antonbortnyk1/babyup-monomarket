@@ -1,7 +1,9 @@
 import os
+import re
 import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from xml.dom import minidom
 
 SOURCE_URL = os.getenv(
     "SOURCE_URL",
@@ -18,28 +20,80 @@ OUTPUT_FILE = Path(
 LIMIT = int(os.getenv("PRODUCTS_LIMIT", "0"))
 
 
+def clean_xml_text(value):
+    if value is None:
+        return None
+
+    value = str(value)
+
+    value = re.sub(
+        r"[\x00-\x08\x0B\x0C\x0E-\x1F]",
+        "",
+        value
+    )
+
+    value = value.strip()
+
+    return value if value else None
+
+
 def text(node, name):
     child = node.find(name)
 
     if child is None or child.text is None:
         return None
 
-    value = child.text.strip()
-
-    return value if value else None
+    return clean_xml_text(child.text)
 
 
-def get_param(node, param_name):
+def get_params(node):
+    result = []
+
     for param in node.findall("param"):
-        name = str(param.get("name", "")).strip().lower()
+        name = clean_xml_text(
+            param.get("name")
+        )
 
-        if name == param_name.lower():
-            value = (param.text or "").strip()
+        value = clean_xml_text(
+            param.text
+        )
 
-            if value:
-                return value
+        if not name or not value:
+            continue
+
+        result.append(
+            {
+                "name": name,
+                "value": value
+            }
+        )
+
+    return result
+
+
+def get_barcode(params):
+    for param in params:
+        if param["name"].strip().lower() == "ean":
+            return param["value"]
 
     return None
+
+
+def get_pictures(node):
+    result = []
+
+    for picture in node.findall("picture"):
+        value = clean_xml_text(
+            picture.text
+        )
+
+        if not value:
+            continue
+
+        if value not in result:
+            result.append(value)
+
+    return result
 
 
 def load_xml():
@@ -50,61 +104,143 @@ def load_xml():
         }
     )
 
-    with urllib.request.urlopen(request, timeout=60) as response:
+    with urllib.request.urlopen(
+        request,
+        timeout=60
+    ) as response:
         return response.read()
 
 
 def build_categories(root):
-    categories = {}
+    result = {}
 
-    for category in root.findall("./shop/categories/category"):
-        category_id = str(category.get("id", "")).strip()
-        category_name = (category.text or "").strip()
+    for category in root.findall(
+        "./shop/categories/category"
+    ):
+        category_id = clean_xml_text(
+            category.get("id")
+        )
 
-        if category_id and category_name:
-            categories[category_id] = category_name
+        category_name = clean_xml_text(
+            category.text
+        )
 
-    return categories
+        if (
+            category_id
+            and category_name
+        ):
+            result[
+                category_id
+            ] = category_name
+
+    return result
 
 
-def clean_barcode(value):
-    if not value:
+def add_text_element(
+    document,
+    parent,
+    name,
+    value
+):
+    value = clean_xml_text(value)
+
+    if value is None:
         return None
 
-    value = value.strip()
+    element = document.createElement(
+        name
+    )
 
-    if not value:
+    element.appendChild(
+        document.createTextNode(
+            value
+        )
+    )
+
+    parent.appendChild(
+        element
+    )
+
+    return element
+
+
+def add_cdata_element(
+    document,
+    parent,
+    name,
+    value
+):
+    value = clean_xml_text(value)
+
+    if value is None:
         return None
 
-    return value
+    value = value.replace(
+        "]]>",
+        "]]]]><![CDATA[>"
+    )
+
+    element = document.createElement(
+        name
+    )
+
+    element.appendChild(
+        document.createCDATASection(
+            value
+        )
+    )
+
+    parent.appendChild(
+        element
+    )
+
+    return element
 
 
 def convert(xml_bytes):
-    source_root = ET.fromstring(xml_bytes)
+    source_root = ET.fromstring(
+        xml_bytes
+    )
 
-    categories = build_categories(source_root)
+    categories = build_categories(
+        source_root
+    )
 
     source_offers = source_root.findall(
         "./shop/offers/offer"
     )
 
     if LIMIT > 0:
-        source_offers = source_offers[:LIMIT]
+        source_offers = source_offers[
+            :LIMIT
+        ]
 
-    market = ET.Element("Market")
-    offers = ET.SubElement(market, "offers")
+    document = minidom.Document()
+
+    market = document.createElement(
+        "Market"
+    )
+
+    document.appendChild(
+        market
+    )
+
+    offers = document.createElement(
+        "offers"
+    )
+
+    market.appendChild(
+        offers
+    )
 
     total = 0
-    skipped = 0
+    skipped_unavailable = 0
+    skipped_invalid = 0
 
     for source_offer in source_offers:
-        code = str(
-            source_offer.get("id", "")
-        ).strip()
-
-        if not code:
-            skipped += 1
-            continue
+        code = clean_xml_text(
+            source_offer.get("id")
+        )
 
         available = (
             str(
@@ -112,11 +248,14 @@ def convert(xml_bytes):
                     "available",
                     "false"
                 )
-            ).lower()
+            )
+            .strip()
+            .lower()
             == "true"
         )
 
         if not available:
+            skipped_unavailable += 1
             continue
 
         title = text(
@@ -130,7 +269,9 @@ def convert(xml_bytes):
         )
 
         category = (
-            categories.get(category_id)
+            categories.get(
+                category_id
+            )
             if category_id
             else None
         )
@@ -140,66 +281,161 @@ def convert(xml_bytes):
             "vendor"
         )
 
-        barcode = clean_barcode(
-            get_param(
-                source_offer,
-                "EAN"
-            )
+        product_url = text(
+            source_offer,
+            "url"
         )
 
-        if not title or not category:
-            skipped += 1
+        description = text(
+            source_offer,
+            "description"
+        )
+
+        params = get_params(
+            source_offer
+        )
+
+        barcode = get_barcode(
+            params
+        )
+
+        pictures = get_pictures(
+            source_offer
+        )
+
+        if (
+            not code
+            or not title
+            or not category
+        ):
+            skipped_invalid += 1
             continue
 
-        offer = ET.SubElement(
-            offers,
+        offer = document.createElement(
             "offer"
         )
 
-        ET.SubElement(
-            offer,
-            "id"
-        ).text = code
+        offers.appendChild(
+            offer
+        )
 
-        ET.SubElement(
+        add_text_element(
+            document,
             offer,
-            "code"
-        ).text = code
+            "id",
+            code
+        )
 
-        ET.SubElement(
+        add_text_element(
+            document,
             offer,
-            "title"
-        ).text = title
+            "code",
+            code
+        )
+
+        add_text_element(
+            document,
+            offer,
+            "vendor_code",
+            code
+        )
+
+        add_text_element(
+            document,
+            offer,
+            "title",
+            title
+        )
 
         if barcode:
-            ET.SubElement(
+            add_text_element(
+                document,
                 offer,
-                "barcode"
-            ).text = barcode
+                "barcode",
+                barcode
+            )
 
-        ET.SubElement(
+        add_text_element(
+            document,
             offer,
-            "category"
-        ).text = category
+            "category",
+            category
+        )
 
         if brand:
-            ET.SubElement(
+            add_text_element(
+                document,
                 offer,
-                "brand"
-            ).text = brand
+                "brand",
+                brand
+            )
 
-        ET.SubElement(
+        add_text_element(
+            document,
             offer,
-            "availability"
-        ).text = "Є в наявності"
+            "availability",
+            "Є в наявності"
+        )
+
+        if product_url:
+            add_text_element(
+                document,
+                offer,
+                "url",
+                product_url
+            )
+
+        for picture in pictures:
+            add_text_element(
+                document,
+                offer,
+                "picture",
+                picture
+            )
+
+        if description:
+            add_cdata_element(
+                document,
+                offer,
+                "description",
+                description
+            )
+
+        for param in params:
+            if (
+                param["name"]
+                .strip()
+                .lower()
+                == "ean"
+            ):
+                continue
+
+            param_element = (
+                document.createElement(
+                    "param"
+                )
+            )
+
+            param_element.setAttribute(
+                "name",
+                param["name"]
+            )
+
+            param_element.appendChild(
+                document.createTextNode(
+                    param["value"]
+                )
+            )
+
+            offer.appendChild(
+                param_element
+            )
 
         total += 1
 
-    tree = ET.ElementTree(market)
-
-    ET.indent(
-        tree,
-        space="    "
+    xml = document.toprettyxml(
+        indent="    ",
+        encoding="UTF-8"
     )
 
     OUTPUT_FILE.parent.mkdir(
@@ -207,26 +443,33 @@ def convert(xml_bytes):
         exist_ok=True
     )
 
-    tree.write(
-        OUTPUT_FILE,
-        encoding="UTF-8",
-        xml_declaration=True
+    OUTPUT_FILE.write_bytes(
+        xml
     )
 
-    return total, skipped
+    return (
+        total,
+        skipped_unavailable,
+        skipped_invalid
+    )
 
 
 def main():
     xml_bytes = load_xml()
 
-    total, skipped = convert(
+    (
+        total,
+        skipped_unavailable,
+        skipped_invalid
+    ) = convert(
         xml_bytes
     )
 
     print(
         f"Generated {OUTPUT_FILE}: "
         f"{total} products, "
-        f"{skipped} skipped"
+        f"{skipped_unavailable} unavailable skipped, "
+        f"{skipped_invalid} invalid skipped"
     )
 
 
