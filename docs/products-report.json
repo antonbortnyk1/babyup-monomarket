@@ -1,11 +1,143 @@
 {
-  "generatedAt": "2026-09-23T10:06:09Z",
+  "generatedAt": "2026-09-23T10:31:38Z",
   "source": "https://babyup.ua/marketplace-integration/rozetka-feed/ff442a101279a54baa44e63e8da3cec2",
-  "sourceOffers": 11,
-  "exported": 7,
+  "sourceOffers": 86,
+  "exported": 49,
   "skipped": [
     {
+      "code": "00000004196",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000004194",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000004081",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000004082",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000005813",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000006299",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000006300",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000008234",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000008815",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000008818",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000008817",
+      "reason": "not_available"
+    },
+    {
       "code": "00000007575",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000007752",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000009121",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000009126",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000009124",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000009910",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000009911",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000004188",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000006683",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000006684",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000004090",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000004091",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000004092",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000004093",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000006678",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000004100",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000007946",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000007943",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000007944",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000007947",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000007942",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000009431",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000009435",
       "reason": "not_available"
     },
     {
@@ -23,6 +155,182 @@
   ],
   "warnings": [
     {
+      "code": "00000004087",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000004087",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000004087",
+      "warning": "few_characteristics",
+      "details": "0 characteristics found"
+    },
+    {
+      "code": "00000006297",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000006297",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000006297",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000006298",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000006298",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000006298",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000008816",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000008816",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000008816",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000007477",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000007477",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000007477",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000006302",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000006302",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000006302",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000006304",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000006304",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000006304",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000006305",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000006305",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000006305",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
       "code": "00000008691",
       "warning": "missing_barcode",
       "fields": [
@@ -104,6 +412,387 @@
       "details": "1 characteristics found"
     },
     {
+      "code": "00000009127",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009127",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009127",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000009125",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009125",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009125",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000009123",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009123",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009123",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000009122",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009122",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009122",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000009896",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009896",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009897",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009897",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009898",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009898",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009900",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009900",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009900",
+      "warning": "few_characteristics",
+      "details": "0 characteristics found"
+    },
+    {
+      "code": "00000009901",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009901",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009901",
+      "warning": "few_characteristics",
+      "details": "0 characteristics found"
+    },
+    {
+      "code": "00000009902",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009902",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009902",
+      "warning": "few_characteristics",
+      "details": "0 characteristics found"
+    },
+    {
+      "code": "00000009903",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009903",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009903",
+      "warning": "few_characteristics",
+      "details": "0 characteristics found"
+    },
+    {
+      "code": "00000009904",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009904",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009904",
+      "warning": "few_characteristics",
+      "details": "0 characteristics found"
+    },
+    {
+      "code": "00000009905",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009905",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009905",
+      "warning": "few_characteristics",
+      "details": "0 characteristics found"
+    },
+    {
+      "code": "00000009906",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009906",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009906",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000009907",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009907",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009907",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000009908",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009908",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009908",
+      "warning": "few_characteristics",
+      "details": "0 characteristics found"
+    },
+    {
+      "code": "00000009909",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009909",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009909",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000009912",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009912",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009912",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
       "code": "00000002836",
       "warning": "missing_barcode",
       "fields": [
@@ -121,14 +810,14 @@
       ]
     },
     {
-      "code": "00000009742",
+      "code": "00000004189",
       "warning": "missing_barcode",
       "fields": [
         "barcode"
       ]
     },
     {
-      "code": "00000009742",
+      "code": "00000004189",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -138,10 +827,303 @@
       ]
     },
     {
-      "code": "00000009741",
+      "code": "00000006682",
       "warning": "missing_barcode",
       "fields": [
         "barcode"
+      ]
+    },
+    {
+      "code": "00000006682",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000007945",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000007945",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000007945",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000009341",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009341",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009341",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000009342",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009342",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009342",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000009260",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009260",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009260",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000007941",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000007941",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000007941",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000008180",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000008180",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000008180",
+      "warning": "few_characteristics",
+      "details": "0 characteristics found"
+    },
+    {
+      "code": "00000008179",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000008179",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000008179",
+      "warning": "few_characteristics",
+      "details": "0 characteristics found"
+    },
+    {
+      "code": "00000008182",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000008182",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000008182",
+      "warning": "few_characteristics",
+      "details": "0 characteristics found"
+    },
+    {
+      "code": "00000008181",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000008181",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000008181",
+      "warning": "few_characteristics",
+      "details": "0 characteristics found"
+    },
+    {
+      "code": "00000009433",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009433",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000009432",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009432",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000009430",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009430",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000009436",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009436",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000009434",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009434",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000009742",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
       ]
     },
     {
