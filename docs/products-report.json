@@ -1,27 +1,15 @@
 {
-  "generatedAt": "2026-09-24T01:37:00Z",
+  "generatedAt": "2026-09-24T02:06:01Z",
   "source": "https://babyup.ua/marketplace-integration/rozetka-feed/ff442a101279a54baa44e63e8da3cec2",
-  "sourceOffers": 86,
+  "sourceOffers": 81,
   "exported": 49,
   "skipped": [
-    {
-      "code": "00000004196",
-      "reason": "not_available"
-    },
-    {
-      "code": "00000004194",
-      "reason": "not_available"
-    },
     {
       "code": "00000004081",
       "reason": "not_available"
     },
     {
       "code": "00000004082",
-      "reason": "not_available"
-    },
-    {
-      "code": "00000005813",
       "reason": "not_available"
     },
     {
@@ -46,14 +34,6 @@
     },
     {
       "code": "00000008817",
-      "reason": "not_available"
-    },
-    {
-      "code": "00000007575",
-      "reason": "not_available"
-    },
-    {
-      "code": "00000007752",
       "reason": "not_available"
     },
     {
@@ -178,13 +158,6 @@
     },
     {
       "code": "00000006297",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000006297",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -200,13 +173,6 @@
     },
     {
       "code": "00000006298",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000006298",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -222,13 +188,6 @@
     },
     {
       "code": "00000008816",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000008816",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -244,13 +203,6 @@
     },
     {
       "code": "00000007477",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000007477",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -266,13 +218,6 @@
     },
     {
       "code": "00000006302",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000006302",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -288,13 +233,6 @@
     },
     {
       "code": "00000006304",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000006304",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -310,13 +248,6 @@
     },
     {
       "code": "00000006305",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000006305",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -332,13 +263,6 @@
     },
     {
       "code": "00000008691",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000008691",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -354,13 +278,6 @@
     },
     {
       "code": "00000008690",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000008690",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -373,13 +290,6 @@
       "code": "00000008690",
       "warning": "few_characteristics",
       "details": "1 characteristics found"
-    },
-    {
-      "code": "00000008692",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
     },
     {
       "code": "00000008692",
@@ -413,13 +323,6 @@
     },
     {
       "code": "00000009127",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000009127",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -435,13 +338,6 @@
     },
     {
       "code": "00000009125",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000009125",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -457,13 +353,6 @@
     },
     {
       "code": "00000009123",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000009123",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -476,13 +365,6 @@
       "code": "00000009123",
       "warning": "few_characteristics",
       "details": "1 characteristics found"
-    },
-    {
-      "code": "00000009122",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
     },
     {
       "code": "00000009122",
@@ -501,13 +383,6 @@
     },
     {
       "code": "00000009896",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000009896",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -518,26 +393,12 @@
     },
     {
       "code": "00000009897",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000009897",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
         "height",
         "width",
         "length"
-      ]
-    },
-    {
-      "code": "00000009898",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
       ]
     },
     {
@@ -570,14 +431,7 @@
     {
       "code": "00000009900",
       "warning": "few_characteristics",
-      "details": "0 characteristics found"
-    },
-    {
-      "code": "00000009901",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
+      "details": "1 characteristics found"
     },
     {
       "code": "00000009901",
@@ -591,128 +445,11 @@
     },
     {
       "code": "00000009901",
-      "warning": "few_characteristics",
-      "details": "0 characteristics found"
-    },
-    {
-      "code": "00000009902",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000009902",
-      "warning": "missing_packaging_dimensions",
-      "fields": [
-        "weight",
-        "height",
-        "width",
-        "length"
-      ]
-    },
-    {
-      "code": "00000009902",
-      "warning": "few_characteristics",
-      "details": "0 characteristics found"
-    },
-    {
-      "code": "00000009903",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000009903",
-      "warning": "missing_packaging_dimensions",
-      "fields": [
-        "weight",
-        "height",
-        "width",
-        "length"
-      ]
-    },
-    {
-      "code": "00000009903",
-      "warning": "few_characteristics",
-      "details": "0 characteristics found"
-    },
-    {
-      "code": "00000009904",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000009904",
-      "warning": "missing_packaging_dimensions",
-      "fields": [
-        "weight",
-        "height",
-        "width",
-        "length"
-      ]
-    },
-    {
-      "code": "00000009904",
-      "warning": "few_characteristics",
-      "details": "0 characteristics found"
-    },
-    {
-      "code": "00000009905",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000009905",
-      "warning": "missing_packaging_dimensions",
-      "fields": [
-        "weight",
-        "height",
-        "width",
-        "length"
-      ]
-    },
-    {
-      "code": "00000009905",
-      "warning": "few_characteristics",
-      "details": "0 characteristics found"
-    },
-    {
-      "code": "00000009906",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000009906",
-      "warning": "missing_packaging_dimensions",
-      "fields": [
-        "weight",
-        "height",
-        "width",
-        "length"
-      ]
-    },
-    {
-      "code": "00000009906",
       "warning": "few_characteristics",
       "details": "1 characteristics found"
     },
     {
-      "code": "00000009907",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000009907",
+      "code": "00000009902",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -722,11 +459,100 @@
       ]
     },
     {
-      "code": "00000009907",
+      "code": "00000009902",
       "warning": "few_characteristics",
       "details": "1 characteristics found"
     },
     {
+      "code": "00000009903",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009903",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000009904",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009904",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009904",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000009905",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000009905",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009905",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000009906",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009906",
+      "warning": "few_characteristics",
+      "details": "2 characteristics found"
+    },
+    {
+      "code": "00000009907",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009907",
+      "warning": "few_characteristics",
+      "details": "2 characteristics found"
+    },
+    {
       "code": "00000009908",
       "warning": "missing_barcode",
       "fields": [
@@ -746,7 +572,7 @@
     {
       "code": "00000009908",
       "warning": "few_characteristics",
-      "details": "0 characteristics found"
+      "details": "1 characteristics found"
     },
     {
       "code": "00000009909",
@@ -772,13 +598,6 @@
     },
     {
       "code": "00000009912",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000009912",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -790,7 +609,7 @@
     {
       "code": "00000009912",
       "warning": "few_characteristics",
-      "details": "1 characteristics found"
+      "details": "2 characteristics found"
     },
     {
       "code": "00000002836",
@@ -811,13 +630,6 @@
     },
     {
       "code": "00000004189",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000004189",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -828,26 +640,12 @@
     },
     {
       "code": "00000006682",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000006682",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
         "height",
         "width",
         "length"
-      ]
-    },
-    {
-      "code": "00000007945",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
       ]
     },
     {
@@ -867,13 +665,6 @@
     },
     {
       "code": "00000009341",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000009341",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -889,13 +680,6 @@
     },
     {
       "code": "00000009342",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000009342",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -911,13 +695,6 @@
     },
     {
       "code": "00000009260",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000009260",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -930,13 +707,6 @@
       "code": "00000009260",
       "warning": "few_characteristics",
       "details": "1 characteristics found"
-    },
-    {
-      "code": "00000007941",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
     },
     {
       "code": "00000007941",
@@ -955,13 +725,6 @@
     },
     {
       "code": "00000008180",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000008180",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -973,14 +736,7 @@
     {
       "code": "00000008180",
       "warning": "few_characteristics",
-      "details": "0 characteristics found"
-    },
-    {
-      "code": "00000008179",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
+      "details": "1 characteristics found"
     },
     {
       "code": "00000008179",
@@ -995,14 +751,7 @@
     {
       "code": "00000008179",
       "warning": "few_characteristics",
-      "details": "0 characteristics found"
-    },
-    {
-      "code": "00000008182",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
+      "details": "1 characteristics found"
     },
     {
       "code": "00000008182",
@@ -1017,14 +766,7 @@
     {
       "code": "00000008182",
       "warning": "few_characteristics",
-      "details": "0 characteristics found"
-    },
-    {
-      "code": "00000008181",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
+      "details": "1 characteristics found"
     },
     {
       "code": "00000008181",
@@ -1039,7 +781,7 @@
     {
       "code": "00000008181",
       "warning": "few_characteristics",
-      "details": "0 characteristics found"
+      "details": "1 characteristics found"
     },
     {
       "code": "00000009433",
