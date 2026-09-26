@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-09-26T01:36:35Z",
-  "total": 112,
+  "updatedAt": "2026-09-26T02:05:51Z",
+  "total": 113,
   "data": [
     {
       "code": "00000004081",
@@ -527,6 +527,24 @@
     {
       "code": "00000009898",
       "price": 23249,
+      "old_price": null,
+      "availability": true,
+      "stock": 999,
+      "warehouses": [
+        {
+          "id": "1",
+          "stock": 999
+        }
+      ],
+      "warranty_type": "no",
+      "warranty_period": 0,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 2,
+      "manufacture": null
+    },
+    {
+      "code": "00000009899",
+      "price": 23250,
       "old_price": null,
       "availability": true,
       "stock": 999,
