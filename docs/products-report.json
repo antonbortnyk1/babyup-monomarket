@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-03T01:39:35Z",
+  "generatedAt": "2026-10-03T02:05:26Z",
   "source": "https://babyup.ua/marketplace-integration/rozetka-feed/ff442a101279a54baa44e63e8da3cec2",
   "sourceOffers": 113,
-  "exported": 72,
+  "exported": 75,
   "skipped": [
     {
       "code": "00000004081",
@@ -137,10 +137,6 @@
       "reason": "not_available"
     },
     {
-      "code": "00000004110",
-      "reason": "not_available"
-    },
-    {
       "code": "00000004102",
       "reason": "not_available"
     },
@@ -150,14 +146,6 @@
     },
     {
       "code": "00000004105",
-      "reason": "not_available"
-    },
-    {
-      "code": "00000004184",
-      "reason": "not_available"
-    },
-    {
-      "code": "00000008274",
       "reason": "not_available"
     },
     {
@@ -992,6 +980,72 @@
     },
     {
       "code": "00000004107",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000004110",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000004110",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000004110",
+      "warning": "few_characteristics",
+      "details": "0 characteristics found"
+    },
+    {
+      "code": "00000004184",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000004184",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000004184",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
+      "code": "00000008274",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000008274",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000008274",
       "warning": "few_characteristics",
       "details": "1 characteristics found"
     },
