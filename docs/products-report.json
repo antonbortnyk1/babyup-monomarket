@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-08T01:41:32Z",
+  "generatedAt": "2026-10-08T02:07:15Z",
   "source": "https://babyup.ua/marketplace-integration/rozetka-feed/ff442a101279a54baa44e63e8da3cec2",
   "sourceOffers": 113,
-  "exported": 75,
+  "exported": 76,
   "skipped": [
     {
       "code": "00000004081",
@@ -25,15 +25,11 @@
       "reason": "not_available"
     },
     {
-      "code": "00000008818",
-      "reason": "not_available"
-    },
-    {
-      "code": "00000008817",
-      "reason": "not_available"
-    },
-    {
       "code": "00000006304",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000008692",
       "reason": "not_available"
     },
     {
@@ -45,11 +41,11 @@
       "reason": "not_available"
     },
     {
-      "code": "00000009910",
+      "code": "00000009896",
       "reason": "not_available"
     },
     {
-      "code": "00000009911",
+      "code": "00000009910",
       "reason": "not_available"
     },
     {
@@ -121,19 +117,11 @@
       "reason": "not_available"
     },
     {
-      "code": "00000009743",
-      "reason": "not_available"
-    },
-    {
       "code": "00000009740",
       "reason": "not_available"
     },
     {
       "code": "00000004108",
-      "reason": "not_available"
-    },
-    {
-      "code": "00000004109",
       "reason": "not_available"
     },
     {
@@ -145,7 +133,15 @@
       "reason": "not_available"
     },
     {
-      "code": "00000004105",
+      "code": "00000004184",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000008274",
+      "reason": "not_available"
+    },
+    {
+      "code": "00000006690",
       "reason": "not_available"
     },
     {
@@ -176,11 +172,6 @@
       ]
     },
     {
-      "code": "00000004087",
-      "warning": "few_characteristics",
-      "details": "0 characteristics found"
-    },
-    {
       "code": "00000006297",
       "warning": "missing_packaging_dimensions",
       "fields": [
@@ -189,11 +180,6 @@
         "width",
         "length"
       ]
-    },
-    {
-      "code": "00000006297",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
     },
     {
       "code": "00000006298",
@@ -206,11 +192,6 @@
       ]
     },
     {
-      "code": "00000006298",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
-    },
-    {
       "code": "00000008815",
       "warning": "missing_packaging_dimensions",
       "fields": [
@@ -219,11 +200,6 @@
         "width",
         "length"
       ]
-    },
-    {
-      "code": "00000008815",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
     },
     {
       "code": "00000008816",
@@ -236,12 +212,17 @@
       ]
     },
     {
-      "code": "00000008816",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
+      "code": "00000008818",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
     },
     {
-      "code": "00000007477",
+      "code": "00000008817",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -252,8 +233,13 @@
     },
     {
       "code": "00000007477",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
     },
     {
       "code": "00000006302",
@@ -266,11 +252,6 @@
       ]
     },
     {
-      "code": "00000006302",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
-    },
-    {
       "code": "00000006305",
       "warning": "missing_packaging_dimensions",
       "fields": [
@@ -279,11 +260,6 @@
         "width",
         "length"
       ]
-    },
-    {
-      "code": "00000006305",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
     },
     {
       "code": "00000008691",
@@ -296,11 +272,6 @@
       ]
     },
     {
-      "code": "00000008691",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
-    },
-    {
       "code": "00000008690",
       "warning": "missing_packaging_dimensions",
       "fields": [
@@ -309,26 +280,6 @@
         "width",
         "length"
       ]
-    },
-    {
-      "code": "00000008690",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
-    },
-    {
-      "code": "00000008692",
-      "warning": "missing_packaging_dimensions",
-      "fields": [
-        "weight",
-        "height",
-        "width",
-        "length"
-      ]
-    },
-    {
-      "code": "00000008692",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
     },
     {
       "code": "00000007572",
@@ -341,11 +292,6 @@
       ]
     },
     {
-      "code": "00000007572",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
-    },
-    {
       "code": "00000009126",
       "warning": "missing_packaging_dimensions",
       "fields": [
@@ -354,11 +300,6 @@
         "width",
         "length"
       ]
-    },
-    {
-      "code": "00000009126",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
     },
     {
       "code": "00000009127",
@@ -371,11 +312,6 @@
       ]
     },
     {
-      "code": "00000009127",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
-    },
-    {
       "code": "00000009125",
       "warning": "missing_packaging_dimensions",
       "fields": [
@@ -384,11 +320,6 @@
         "width",
         "length"
       ]
-    },
-    {
-      "code": "00000009125",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
     },
     {
       "code": "00000009123",
@@ -401,27 +332,7 @@
       ]
     },
     {
-      "code": "00000009123",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
-    },
-    {
       "code": "00000009122",
-      "warning": "missing_packaging_dimensions",
-      "fields": [
-        "weight",
-        "height",
-        "width",
-        "length"
-      ]
-    },
-    {
-      "code": "00000009122",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
-    },
-    {
-      "code": "00000009896",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -468,11 +379,6 @@
       ]
     },
     {
-      "code": "00000009899",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
-    },
-    {
       "code": "00000009900",
       "warning": "missing_barcode",
       "fields": [
@@ -488,11 +394,6 @@
         "width",
         "length"
       ]
-    },
-    {
-      "code": "00000009900",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
     },
     {
       "code": "00000009901",
@@ -507,7 +408,7 @@
     {
       "code": "00000009901",
       "warning": "few_characteristics",
-      "details": "1 characteristics found"
+      "details": "2 characteristics found"
     },
     {
       "code": "00000009902",
@@ -522,7 +423,7 @@
     {
       "code": "00000009902",
       "warning": "few_characteristics",
-      "details": "1 characteristics found"
+      "details": "2 characteristics found"
     },
     {
       "code": "00000009903",
@@ -537,7 +438,7 @@
     {
       "code": "00000009903",
       "warning": "few_characteristics",
-      "details": "1 characteristics found"
+      "details": "2 characteristics found"
     },
     {
       "code": "00000009904",
@@ -559,7 +460,7 @@
     {
       "code": "00000009904",
       "warning": "few_characteristics",
-      "details": "1 characteristics found"
+      "details": "2 characteristics found"
     },
     {
       "code": "00000009905",
@@ -581,7 +482,7 @@
     {
       "code": "00000009905",
       "warning": "few_characteristics",
-      "details": "1 characteristics found"
+      "details": "2 characteristics found"
     },
     {
       "code": "00000009906",
@@ -594,11 +495,6 @@
       ]
     },
     {
-      "code": "00000009906",
-      "warning": "few_characteristics",
-      "details": "2 characteristics found"
-    },
-    {
       "code": "00000009907",
       "warning": "missing_packaging_dimensions",
       "fields": [
@@ -607,11 +503,6 @@
         "width",
         "length"
       ]
-    },
-    {
-      "code": "00000009907",
-      "warning": "few_characteristics",
-      "details": "2 characteristics found"
     },
     {
       "code": "00000009908",
@@ -658,7 +549,7 @@
       "details": "1 characteristics found"
     },
     {
-      "code": "00000009912",
+      "code": "00000009911",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -669,8 +560,13 @@
     },
     {
       "code": "00000009912",
-      "warning": "few_characteristics",
-      "details": "2 characteristics found"
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
     },
     {
       "code": "00000002836",
@@ -720,11 +616,6 @@
       ]
     },
     {
-      "code": "00000007945",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
-    },
-    {
       "code": "00000009341",
       "warning": "missing_packaging_dimensions",
       "fields": [
@@ -733,11 +624,6 @@
         "width",
         "length"
       ]
-    },
-    {
-      "code": "00000009341",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
     },
     {
       "code": "00000009342",
@@ -750,11 +636,6 @@
       ]
     },
     {
-      "code": "00000009342",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
-    },
-    {
       "code": "00000009260",
       "warning": "missing_packaging_dimensions",
       "fields": [
@@ -763,11 +644,6 @@
         "width",
         "length"
       ]
-    },
-    {
-      "code": "00000009260",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
     },
     {
       "code": "00000007941",
@@ -780,11 +656,6 @@
       ]
     },
     {
-      "code": "00000007941",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
-    },
-    {
       "code": "00000008180",
       "warning": "missing_packaging_dimensions",
       "fields": [
@@ -793,11 +664,6 @@
         "width",
         "length"
       ]
-    },
-    {
-      "code": "00000008180",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
     },
     {
       "code": "00000008179",
@@ -810,11 +676,6 @@
       ]
     },
     {
-      "code": "00000008179",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
-    },
-    {
       "code": "00000008182",
       "warning": "missing_packaging_dimensions",
       "fields": [
@@ -823,11 +684,6 @@
         "width",
         "length"
       ]
-    },
-    {
-      "code": "00000008182",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
     },
     {
       "code": "00000008181",
@@ -840,11 +696,6 @@
       ]
     },
     {
-      "code": "00000008181",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
-    },
-    {
       "code": "00000009433",
       "warning": "missing_packaging_dimensions",
       "fields": [
@@ -853,11 +704,6 @@
         "width",
         "length"
       ]
-    },
-    {
-      "code": "00000009433",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
     },
     {
       "code": "00000009432",
@@ -870,11 +716,6 @@
       ]
     },
     {
-      "code": "00000009432",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
-    },
-    {
       "code": "00000009430",
       "warning": "missing_packaging_dimensions",
       "fields": [
@@ -883,11 +724,6 @@
         "width",
         "length"
       ]
-    },
-    {
-      "code": "00000009430",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
     },
     {
       "code": "00000009436",
@@ -900,11 +736,6 @@
       ]
     },
     {
-      "code": "00000009436",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
-    },
-    {
       "code": "00000009434",
       "warning": "missing_packaging_dimensions",
       "fields": [
@@ -913,14 +744,19 @@
         "width",
         "length"
       ]
-    },
-    {
-      "code": "00000009434",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
     },
     {
       "code": "00000009742",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009743",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -957,11 +793,6 @@
       ]
     },
     {
-      "code": "00000004106",
-      "warning": "few_characteristics",
-      "details": "0 characteristics found"
-    },
-    {
       "code": "00000004107",
       "warning": "missing_barcode",
       "fields": [
@@ -979,9 +810,21 @@
       ]
     },
     {
-      "code": "00000004107",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
+      "code": "00000004109",
+      "warning": "missing_barcode",
+      "fields": [
+        "barcode"
+      ]
+    },
+    {
+      "code": "00000004109",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
     },
     {
       "code": "00000004110",
@@ -1001,19 +844,14 @@
       ]
     },
     {
-      "code": "00000004110",
-      "warning": "few_characteristics",
-      "details": "0 characteristics found"
-    },
-    {
-      "code": "00000004184",
+      "code": "00000004105",
       "warning": "missing_barcode",
       "fields": [
         "barcode"
       ]
     },
     {
-      "code": "00000004184",
+      "code": "00000004105",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -1021,33 +859,6 @@
         "width",
         "length"
       ]
-    },
-    {
-      "code": "00000004184",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
-    },
-    {
-      "code": "00000008274",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000008274",
-      "warning": "missing_packaging_dimensions",
-      "fields": [
-        "weight",
-        "height",
-        "width",
-        "length"
-      ]
-    },
-    {
-      "code": "00000008274",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
     },
     {
       "code": "00000005295",
@@ -1067,11 +878,6 @@
       ]
     },
     {
-      "code": "00000005295",
-      "warning": "few_characteristics",
-      "details": "0 characteristics found"
-    },
-    {
       "code": "00000005294",
       "warning": "missing_barcode",
       "fields": [
@@ -1089,11 +895,6 @@
       ]
     },
     {
-      "code": "00000005294",
-      "warning": "few_characteristics",
-      "details": "0 characteristics found"
-    },
-    {
       "code": "00000005293",
       "warning": "missing_barcode",
       "fields": [
@@ -1109,11 +910,6 @@
         "width",
         "length"
       ]
-    },
-    {
-      "code": "00000005293",
-      "warning": "few_characteristics",
-      "details": "0 characteristics found"
     },
     {
       "code": "00000006687",
@@ -1136,27 +932,7 @@
       ]
     },
     {
-      "code": "00000006689",
-      "warning": "few_characteristics",
-      "details": "1 characteristics found"
-    },
-    {
       "code": "00000006688",
-      "warning": "missing_packaging_dimensions",
-      "fields": [
-        "weight",
-        "height",
-        "width",
-        "length"
-      ]
-    },
-    {
-      "code": "00000006688",
-      "warning": "few_characteristics",
-      "details": "0 characteristics found"
-    },
-    {
-      "code": "00000006690",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -1174,11 +950,6 @@
         "width",
         "length"
       ]
-    },
-    {
-      "code": "00000007580",
-      "warning": "few_characteristics",
-      "details": "0 characteristics found"
     },
     {
       "code": "00000008935",
