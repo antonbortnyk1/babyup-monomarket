@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T01:10:28Z",
+  "updatedAt": "2026-10-20T01:58:06Z",
   "total": 113,
   "data": [
     {
@@ -1102,8 +1102,8 @@
     },
     {
       "code": "00000009341",
-      "price": 12999,
-      "old_price": 15999,
+      "price": 15999,
+      "old_price": null,
       "availability": true,
       "stock": 999,
       "warehouses": [
