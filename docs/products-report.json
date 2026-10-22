@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T10:59:16Z",
+  "generatedAt": "2026-10-22T11:28:42Z",
   "source": "https://babyup.ua/marketplace-integration/rozetka-feed/ff442a101279a54baa44e63e8da3cec2",
   "sourceOffers": 174,
   "exported": 123,
@@ -228,6 +228,11 @@
       ]
     },
     {
+      "code": "00000008708",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
+    },
+    {
       "code": "00000008709",
       "warning": "missing_barcode",
       "fields": [
@@ -243,6 +248,11 @@
         "width",
         "length"
       ]
+    },
+    {
+      "code": "00000008709",
+      "warning": "few_characteristics",
+      "details": "1 characteristics found"
     },
     {
       "code": "00000010070",
