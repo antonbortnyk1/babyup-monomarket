@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-24T00:10:17Z",
-  "total": 174,
+  "updatedAt": "2026-10-24T04:51:37Z",
+  "total": 178,
   "data": [
     {
       "code": "00000008708",
@@ -1659,6 +1659,78 @@
       "manufacture": null
     },
     {
+      "code": "00000010433",
+      "price": 9111,
+      "old_price": null,
+      "availability": true,
+      "stock": 999,
+      "warehouses": [
+        {
+          "id": "1",
+          "stock": 999
+        }
+      ],
+      "warranty_type": "no",
+      "warranty_period": 0,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 2,
+      "manufacture": null
+    },
+    {
+      "code": "00000010434",
+      "price": 5265,
+      "old_price": null,
+      "availability": true,
+      "stock": 999,
+      "warehouses": [
+        {
+          "id": "1",
+          "stock": 999
+        }
+      ],
+      "warranty_type": "no",
+      "warranty_period": 0,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 2,
+      "manufacture": null
+    },
+    {
+      "code": "00000010435",
+      "price": 4699,
+      "old_price": null,
+      "availability": true,
+      "stock": 999,
+      "warehouses": [
+        {
+          "id": "1",
+          "stock": 999
+        }
+      ],
+      "warranty_type": "no",
+      "warranty_period": 0,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 2,
+      "manufacture": null
+    },
+    {
+      "code": "00000010436",
+      "price": 320,
+      "old_price": null,
+      "availability": true,
+      "stock": 999,
+      "warehouses": [
+        {
+          "id": "1",
+          "stock": 999
+        }
+      ],
+      "warranty_type": "no",
+      "warranty_period": 0,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 2,
+      "manufacture": null
+    },
+    {
       "code": "00000004189",
       "price": 9999,
       "old_price": null,
@@ -2452,7 +2524,7 @@
     },
     {
       "code": "00000004105",
-      "price": 689,
+      "price": 990,
       "old_price": null,
       "availability": true,
       "stock": 999,
