@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-30T02:47:24Z",
+  "updatedAt": "2026-10-30T09:24:11Z",
   "total": 178,
   "data": [
     {
@@ -222,12 +222,12 @@
       "code": "00000006298",
       "price": 31799,
       "old_price": null,
-      "availability": true,
-      "stock": 999,
+      "availability": false,
+      "stock": 0,
       "warehouses": [
         {
           "id": "1",
-          "stock": 999
+          "stock": 0
         }
       ],
       "warranty_type": "no",
@@ -384,12 +384,12 @@
       "code": "00000006305",
       "price": 22999,
       "old_price": 28999,
-      "availability": true,
-      "stock": 999,
+      "availability": false,
+      "stock": 0,
       "warehouses": [
         {
           "id": "1",
-          "stock": 999
+          "stock": 0
         }
       ],
       "warranty_type": "no",
@@ -456,12 +456,12 @@
       "code": "00000007572",
       "price": 36199,
       "old_price": null,
-      "availability": true,
-      "stock": 999,
+      "availability": false,
+      "stock": 0,
       "warehouses": [
         {
           "id": "1",
-          "stock": 999
+          "stock": 0
         }
       ],
       "warranty_type": "no",
@@ -582,12 +582,12 @@
       "code": "00000009122",
       "price": 36199,
       "old_price": null,
-      "availability": true,
-      "stock": 999,
+      "availability": false,
+      "stock": 0,
       "warehouses": [
         {
           "id": "1",
-          "stock": 999
+          "stock": 0
         }
       ],
       "warranty_type": "no",
@@ -1716,12 +1716,12 @@
       "code": "00000010436",
       "price": 320,
       "old_price": null,
-      "availability": true,
-      "stock": 999,
+      "availability": false,
+      "stock": 0,
       "warehouses": [
         {
           "id": "1",
-          "stock": 999
+          "stock": 0
         }
       ],
       "warranty_type": "no",
