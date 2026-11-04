@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-04T00:44:37Z",
+  "updatedAt": "2026-11-04T07:08:33Z",
   "total": 178,
   "data": [
     {
@@ -258,12 +258,12 @@
       "code": "00000008815",
       "price": 36199,
       "old_price": null,
-      "availability": true,
-      "stock": 999,
+      "availability": false,
+      "stock": 0,
       "warehouses": [
         {
           "id": "1",
-          "stock": 999
+          "stock": 0
         }
       ],
       "warranty_type": "no",
@@ -456,12 +456,12 @@
       "code": "00000007572",
       "price": 36199,
       "old_price": null,
-      "availability": false,
-      "stock": 0,
+      "availability": true,
+      "stock": 999,
       "warehouses": [
         {
           "id": "1",
-          "stock": 0
+          "stock": 999
         }
       ],
       "warranty_type": "no",
@@ -474,12 +474,12 @@
       "code": "00000009121",
       "price": 36199,
       "old_price": null,
-      "availability": true,
-      "stock": 999,
+      "availability": false,
+      "stock": 0,
       "warehouses": [
         {
           "id": "1",
-          "stock": 999
+          "stock": 0
         }
       ],
       "warranty_type": "no",
@@ -2182,8 +2182,8 @@
     },
     {
       "code": "00000009433",
-      "price": 15499,
-      "old_price": null,
+      "price": 13169,
+      "old_price": 15499,
       "availability": true,
       "stock": 999,
       "warehouses": [
@@ -2290,8 +2290,8 @@
     },
     {
       "code": "00000009434",
-      "price": 15499,
-      "old_price": null,
+      "price": 13169,
+      "old_price": 15499,
       "availability": true,
       "stock": 999,
       "warehouses": [
@@ -2344,8 +2344,8 @@
     },
     {
       "code": "00000009743",
-      "price": 15999,
-      "old_price": null,
+      "price": 13599,
+      "old_price": 15999,
       "availability": false,
       "stock": 0,
       "warehouses": [
@@ -2362,8 +2362,8 @@
     },
     {
       "code": "00000009741",
-      "price": 15999,
-      "old_price": null,
+      "price": 13599,
+      "old_price": 15999,
       "availability": true,
       "stock": 999,
       "warehouses": [
