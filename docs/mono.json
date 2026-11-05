@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T01:55:52Z",
+  "updatedAt": "2026-11-05T08:53:21Z",
   "total": 178,
   "data": [
     {
@@ -1464,12 +1464,12 @@
       "code": "00000009961",
       "price": 1319,
       "old_price": 1659,
-      "availability": true,
-      "stock": 999,
+      "availability": false,
+      "stock": 0,
       "warehouses": [
         {
           "id": "1",
-          "stock": 999
+          "stock": 0
         }
       ],
       "warranty_type": "no",
@@ -2994,12 +2994,12 @@
       "code": "00000008694",
       "price": 1590,
       "old_price": null,
-      "availability": true,
-      "stock": 999,
+      "availability": false,
+      "stock": 0,
       "warehouses": [
         {
           "id": "1",
-          "stock": 999
+          "stock": 0
         }
       ],
       "warranty_type": "no",
