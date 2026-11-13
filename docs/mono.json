@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13T01:59:53Z",
+  "updatedAt": "2026-11-13T09:20:03Z",
   "total": 176,
   "data": [
     {
@@ -454,14 +454,14 @@
     },
     {
       "code": "00000007572",
-      "price": 38000,
+      "price": 36199,
       "old_price": null,
-      "availability": false,
-      "stock": 0,
+      "availability": true,
+      "stock": 999,
       "warehouses": [
         {
           "id": "1",
-          "stock": 0
+          "stock": 999
         }
       ],
       "warranty_type": "no",
