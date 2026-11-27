@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-27T00:13:28Z",
+  "generatedAt": "2026-11-27T08:53:34Z",
   "source": "https://babyup.ua/marketplace-integration/rozetka-feed/ff442a101279a54baa44e63e8da3cec2",
   "sourceOffers": 176,
-  "exported": 130,
+  "exported": 134,
   "skipped": [
     {
       "code": "00000004081",
@@ -34,26 +34,6 @@
     },
     {
       "code": "00000006304",
-      "reason": "not_available"
-    },
-    {
-      "code": "00000006305",
-      "reason": "not_available"
-    },
-    {
-      "code": "00000009126",
-      "reason": "not_available"
-    },
-    {
-      "code": "00000009901",
-      "reason": "not_available"
-    },
-    {
-      "code": "00000009910",
-      "reason": "not_available"
-    },
-    {
-      "code": "00000009911",
       "reason": "not_available"
     },
     {
@@ -145,6 +125,10 @@
       "reason": "not_available"
     },
     {
+      "code": "00000009431",
+      "reason": "not_available"
+    },
+    {
       "code": "00000009435",
       "reason": "not_available"
     },
@@ -169,11 +153,11 @@
       "reason": "not_available"
     },
     {
-      "code": "00000007582",
+      "code": "00000005294",
       "reason": "not_available"
     },
     {
-      "code": "00000009745",
+      "code": "00000007582",
       "reason": "not_available"
     },
     {
@@ -373,6 +357,16 @@
       ]
     },
     {
+      "code": "00000006305",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
       "code": "00000007572",
       "warning": "missing_packaging_dimensions",
       "fields": [
@@ -414,6 +408,16 @@
     },
     {
       "code": "00000009121",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009126",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -535,6 +539,21 @@
         "width",
         "length"
       ]
+    },
+    {
+      "code": "00000009901",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009901",
+      "warning": "few_characteristics",
+      "details": "2 characteristics found"
     },
     {
       "code": "00000009902",
@@ -673,6 +692,26 @@
       "code": "00000009909",
       "warning": "few_characteristics",
       "details": "1 characteristics found"
+    },
+    {
+      "code": "00000009910",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009911",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
     },
     {
       "code": "00000009912",
@@ -1445,16 +1484,6 @@
       ]
     },
     {
-      "code": "00000009431",
-      "warning": "missing_packaging_dimensions",
-      "fields": [
-        "weight",
-        "height",
-        "width",
-        "length"
-      ]
-    },
-    {
       "code": "00000009432",
       "warning": "missing_packaging_dimensions",
       "fields": [
@@ -1621,23 +1650,6 @@
     },
     {
       "code": "00000005295",
-      "warning": "missing_packaging_dimensions",
-      "fields": [
-        "weight",
-        "height",
-        "width",
-        "length"
-      ]
-    },
-    {
-      "code": "00000005294",
-      "warning": "missing_barcode",
-      "fields": [
-        "barcode"
-      ]
-    },
-    {
-      "code": "00000005294",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
@@ -1817,6 +1829,16 @@
     },
     {
       "code": "00000009748",
+      "warning": "missing_packaging_dimensions",
+      "fields": [
+        "weight",
+        "height",
+        "width",
+        "length"
+      ]
+    },
+    {
+      "code": "00000009745",
       "warning": "missing_packaging_dimensions",
       "fields": [
         "weight",
